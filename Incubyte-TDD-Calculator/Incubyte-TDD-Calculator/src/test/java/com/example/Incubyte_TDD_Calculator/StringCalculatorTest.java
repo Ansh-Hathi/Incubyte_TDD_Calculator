@@ -81,6 +81,14 @@ public class StringCalculatorTest {
         assertEquals(10, calculator.add("//[;][|]\n1;2|3;4"));
     }
 
+    @Test
+    public void should_handle_multiple_delimiters_with_length_longer_than_one() {
+        StringCalculator calculator = new StringCalculator();
+        assertEquals(6, calculator.add("//[***][%%%]\n1***2%%%3"));
+        assertEquals(10, calculator.add("//[abc][xyz]\n1abc2xyz3abc4"));
+    }
+
+
 
 
 
