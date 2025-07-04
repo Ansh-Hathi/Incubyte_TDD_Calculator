@@ -3,6 +3,7 @@ package com.example.Incubyte_TDD_Calculator;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class StringCalculatorTest {
 
@@ -45,6 +46,22 @@ public class StringCalculatorTest {
         assertEquals(3, calculator.add("//;\n1;2"));
         assertEquals(10, calculator.add("//|\n1|2|3|4"));
     }
+
+    @Test
+    public void should_throw_exception_for_negative_numbers() {
+        StringCalculator calculator = new StringCalculator();
+
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            calculator.add("1,-2,3");
+        });
+        assertEquals("Negative numbers not allowed: -2", exception.getMessage());
+
+        exception = assertThrows(IllegalArgumentException.class, () -> {
+            calculator.add("1,-2,-3");
+        });
+        assertEquals("Negative numbers not allowed: -2, -3", exception.getMessage());
+    }
+
 
 
 
