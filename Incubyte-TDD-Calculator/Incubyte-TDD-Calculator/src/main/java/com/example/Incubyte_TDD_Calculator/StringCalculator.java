@@ -38,7 +38,7 @@ public class StringCalculator {
             String delimiterPart = numbers.substring(2, delimiterEnd);
             numbers = numbers.substring(delimiterEnd + 1);
 
-            // Handle multiple delimiters in bracket notation
+            // Handle multiple delimiters in bracket notation (any length)
             if (delimiterPart.startsWith("[") && delimiterPart.endsWith("]")) {
                 // Extract all delimiters wrapped in brackets
                 Pattern pattern = Pattern.compile("\\[([^\\]]+)\\]");
@@ -47,7 +47,7 @@ public class StringCalculator {
                 List<String> delimiters = new ArrayList<>();
                 while (matcher.find()) {
                     String del = matcher.group(1);
-                    // Escape special regex characters
+                    // Escape special regex characters for any length delimiter
                     del = del.replaceAll("([\\[\\]\\\\*+?.()|^$])", "\\\\$1");
                     delimiters.add(del);
                 }
