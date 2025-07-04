@@ -68,6 +68,13 @@ public class StringCalculatorTest {
         assertEquals(2, calculator.add("1001,2"));
         assertEquals(1000, calculator.add("1000"));
     }
+    @Test
+    public void should_handle_delimiters_of_any_length() {
+        StringCalculator calculator = new StringCalculator();
+        assertEquals(6, calculator.add("//[***]\n1***2***3"));
+        assertEquals(10, calculator.add("//[abc]\n1abc2abc3abc4"));
+    }
+
 
 
 
