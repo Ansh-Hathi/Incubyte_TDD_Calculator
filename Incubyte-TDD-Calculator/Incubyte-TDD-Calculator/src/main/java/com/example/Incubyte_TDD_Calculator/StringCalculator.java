@@ -33,9 +33,17 @@ public class StringCalculator {
 
         if (numbers.startsWith("//")) {
             int delimiterEnd = numbers.indexOf('\n');
-            delimiter = numbers.substring(2, delimiterEnd);
+            String delimiterPart = numbers.substring(2, delimiterEnd);
             numbers = numbers.substring(delimiterEnd + 1);
-            delimiter = delimiter.replaceAll("([\\[\\]\\\\*+?.()|^$])", "\\\\$1");
+
+            // Handle bracket notation for any length delimiters
+            if (delimiterPart.startsWith("[") && delimiterPart.endsWith("]")) {
+                delimiter = delimiterPart.substring(1, delimiterPart.length() - 1);
+                // Escape special regex characters
+                delimiter = delimiter.replaceAll("([\\[\\]\\\\*+?.()|^$])", "\\\\$1");
+            } else {
+                delimiter = delimiterPart.replaceAll("([\\[\\]\\\\*+?.()|^$])", "\\\\$1");
+            }
         }
 
         String[] parts = numbers.split(delimiter);
@@ -49,8 +57,8 @@ public class StringCalculator {
             }
         }
         return sum;
-
     }
+
 
 
 
