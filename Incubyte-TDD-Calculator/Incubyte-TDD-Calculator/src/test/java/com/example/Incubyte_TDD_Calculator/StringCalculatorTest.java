@@ -74,6 +74,13 @@ public class StringCalculatorTest {
         assertEquals(6, calculator.add("//[***]\n1***2***3"));
         assertEquals(10, calculator.add("//[abc]\n1abc2abc3abc4"));
     }
+    @Test
+    public void should_handle_multiple_delimiters() {
+        StringCalculator calculator = new StringCalculator();
+        assertEquals(6, calculator.add("//[*][%]\n1*2%3"));
+        assertEquals(10, calculator.add("//[;][|]\n1;2|3;4"));
+    }
+
 
 
 
