@@ -32,6 +32,14 @@ public class StringCalculatorTest {
         assertEquals(21, calculator.add("1,2,3,4,5,6"));
     }
 
+    @Test
+    public void should_handle_newline_delimiter() {
+        StringCalculator calculator = new StringCalculator();
+        assertEquals(6, calculator.add("1\n2,3"));
+        assertEquals(10, calculator.add("1\n2\n3\n4"));
+    }
+
+
 
 
 
