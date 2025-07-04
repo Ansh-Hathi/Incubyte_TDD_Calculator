@@ -39,9 +39,13 @@ public class StringCalculator {
 
         int sum = 0;
         for (String part : parts) {
-            sum += Integer.parseInt(part);
+            int num = Integer.parseInt(part);
+            if (num <= 1000) {
+                sum += num;
+            }
         }
         return sum;
+
     }
 
 
