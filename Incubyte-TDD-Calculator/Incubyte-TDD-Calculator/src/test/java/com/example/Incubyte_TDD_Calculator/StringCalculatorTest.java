@@ -88,6 +88,14 @@ public class StringCalculatorTest {
         assertEquals(10, calculator.add("//[abc][xyz]\n1abc2xyz3abc4"));
     }
 
+    @Test
+
+    public void should_handle_numbers_less_than_500(){
+        StringCalculator calc=new StringCalculator();
+        assertEquals(3,calc.add("1,2,600"));
+    }
+
+
 
 
 

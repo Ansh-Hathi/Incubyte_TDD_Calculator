@@ -1,9 +1,11 @@
 package com.example.Incubyte_TDD_Calculator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 public class StringCalculator {
 
@@ -11,7 +13,7 @@ public class StringCalculator {
         return number >= 0 && number <= 1000;
     }
 
-    private void validateNoNegatives(String[] parts) {
+    private void validateNoNegatives(List<String> parts) {
         List<String> negatives = new ArrayList<>();
         for (String part : parts) {
             int num = Integer.parseInt(part);
@@ -25,12 +27,28 @@ public class StringCalculator {
                     String.join(", ", negatives));
         }
     }
-
+    
+    //void delimiter_handling(String numbers)
+    boolean checkNumber(int number){
+        return number<=500;
+    }
     public int add(String numbers) {
         if (numbers.isEmpty()) {
             return 0;
         }
+        List<String> parts = getParts(numbers);
+        validateNoNegatives(parts);
+        Stream<Integer> integerStream = parts.stream().map(Integer::parseInt);
+        List<Integer> validNumbers= integerStream.filter(this::checkNumber).toList();
+        int sum = 0;
+        for (int num : validNumbers) {
 
+            sum += num;
+        }
+        return sum;
+    }
+
+    private static List<String> getParts(String numbers) {
         String delimiter = "[,\n]";
 
         if (numbers.startsWith("//")) {
@@ -61,24 +79,8 @@ public class StringCalculator {
         }
 
         String[] parts = numbers.split(delimiter);
-        validateNoNegatives(parts);
-
-        int sum = 0;
-        for (String part : parts) {
-            int num = Integer.parseInt(part);
-            if (num <= 1000) {
-                sum += num;
-            }
-        }
-        return sum;
+        return Arrays.asList(parts);
     }
-
-
-
-
-
-
-
 
 
 }
